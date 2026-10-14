@@ -5,8 +5,8 @@ from models.journey import Journey, JourneyCreate, JourneyUpdate
 from api.dependencies import get_current_user, get_current_user_id, get_journey_service
 
 router = APIRouter(
-    prefix="/journey",
-    tags=["journey"]
+    prefix="/journeys",
+    tags=["journeys"]
 )
 
 @router.get("/list", response_model=list[Journey])

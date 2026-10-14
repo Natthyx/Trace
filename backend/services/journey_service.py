@@ -1,14 +1,15 @@
+from core.errors import ForbiddenError, NotFoundError
 from models.journey import Journey, JourneyCreate, JourneyUpdate, Visibility
 from repositories.journey_repository import JourneyRepository
 
 
-class JourneyNotFoundError(Exception):
+class JourneyNotFoundError(NotFoundError):
     def __init__(self, journey_id: int):
         super().__init__(f"Journey {journey_id} not found")
         self.journey_id = journey_id
 
 
-class JourneyForbiddenError(Exception):
+class JourneyForbiddenError(ForbiddenError):
     def __init__(self, journey_id: int):
         super().__init__(f"Not allowed to access journey {journey_id}")
         self.journey_id = journey_id
@@ -60,4 +61,4 @@ class JourneyService:
         if journey.user_id != user_id:
             raise JourneyForbiddenError(journey_id=journey_id)
 
-        self.repository.delete(journey=journey)
+        self.repository.delete(journey)

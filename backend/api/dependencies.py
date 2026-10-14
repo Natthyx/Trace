@@ -1,3 +1,4 @@
+from repositories.milestone_repository import MilestoneRepository
 from services.user_service import UserService
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -8,6 +9,7 @@ from repositories.journey_repository import JourneyRepository
 from repositories.user_repository import UserRepository
 from services.journey_service import JourneyService
 from core.security import decode_access_token
+from services.milestone_service import MilestoneService
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -36,3 +38,6 @@ def get_current_user_id(current_user: User = Depends(get_current_user)) -> int:
 
 def get_journey_service(session: Session = Depends(get_db)) -> JourneyService:
     return JourneyService(JourneyRepository(session=session))
+
+def get_milestone_service(session: Session = Depends(get_db)) -> MilestoneService:
+    return MilestoneService(MilestoneRepository(session=session), journey=JourneyRepository(session=session))

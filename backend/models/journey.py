@@ -16,7 +16,7 @@ class Visibility(str, Enum):
 
 class Journey(BaseModel, table=True):
     journey_id: int | None = Field(primary_key=True, default=None)
-    title: str = Field(nullable=False, min_length=1)
+    title: str = Field(min_length=1)
     description: str | None = Field(default=None, nullable=True)
     start_date: datetime | None = Field(default=None, nullable=True)
     end_date: datetime | None = Field(default=None, nullable=True)
