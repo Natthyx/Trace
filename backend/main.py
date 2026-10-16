@@ -4,6 +4,7 @@ from api.routes.journey import router as journey_router
 from fastapi.responses import JSONResponse
 from api.routes.auth import router as auth_router
 from api.routes.milestone import router as milestone_router
+from api.routes.progress import router as progress_router
 from core.errors import AppError
 
 app = FastAPI()
@@ -15,10 +16,9 @@ async def _app_error(request: Request, exc: AppError):
 
 
 init_db()
-@app.get("/")
-async def root():
-    return {"message": "Trace APP is running!"}
+
 
 app.include_router(auth_router)
 app.include_router(journey_router)
 app.include_router(milestone_router)
+app.include_router(progress_router)

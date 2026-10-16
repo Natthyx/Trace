@@ -1,3 +1,5 @@
+from repositories.progress_repository import ProgressRepository
+from services.progress_service import ProgressService
 from repositories.milestone_repository import MilestoneRepository
 from services.user_service import UserService
 from fastapi import Depends, HTTPException, status
@@ -41,3 +43,6 @@ def get_journey_service(session: Session = Depends(get_db)) -> JourneyService:
 
 def get_milestone_service(session: Session = Depends(get_db)) -> MilestoneService:
     return MilestoneService(MilestoneRepository(session=session), journey=JourneyRepository(session=session))
+
+def get_progress_service(session: Session = Depends(get_db)) -> ProgressService:
+    return ProgressService(ProgressRepository(session=session) , journey=JourneyRepository(session=session))
