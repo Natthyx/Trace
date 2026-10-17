@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from api.routes.auth import router as auth_router
 from api.routes.milestone import router as milestone_router
 from api.routes.progress import router as progress_router
+from api.routes.comment import router as comment_router
 from core.errors import AppError
 
 app = FastAPI()
@@ -22,3 +23,4 @@ app.include_router(auth_router)
 app.include_router(journey_router)
 app.include_router(milestone_router)
 app.include_router(progress_router)
+app.include_router(comment_router)
