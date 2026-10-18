@@ -1,3 +1,5 @@
+from repositories.follow_repository import FollowRepository
+from services.follow_service import FollowService
 from repositories.comment_repository import CommentRepository
 from services.comment_service import CommentService
 from repositories.progress_repository import ProgressRepository
@@ -51,3 +53,6 @@ def get_progress_service(session: Session = Depends(get_db)) -> ProgressService:
 
 def get_comment_service(session: Session = Depends(get_db)) -> CommentService:
     return CommentService(CommentRepository(session=session) , progress = ProgressRepository(session=session), journey=JourneyRepository(session=session))
+
+def get_follow_service(session: Session = Depends(get_db)) -> FollowService:
+    return FollowService(FollowRepository(session=session) ,  journey=JourneyRepository(session=session))
